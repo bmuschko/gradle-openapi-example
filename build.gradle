@@ -1,0 +1,34 @@
+plugins {
+    id "base"
+    id "org.openapi.generator" version "7.1.0"
+}
+
+openApiMeta {
+    generatorName = "Sample"
+    packageName = "org.openapitools.example"
+    outputFolder = "$buildDir/meta"
+}
+
+openApiValidate {
+    inputSpec = "$rootDir/petstore-v3.0-invalid.yaml"
+    recommend = true
+}
+
+openApiGenerate {
+    generatorName = "kotlin"
+    inputSpec = "petstore-v3.0.yaml"
+    outputDir = "$buildDir/kotlin"
+    apiPackage = "org.openapitools.example.api"
+    invokerPackage = "org.openapitools.example.invoker"
+    modelPackage = "org.openapitools.example.model"
+    configOptions = [
+        dateLibrary: "java8"
+    ]
+    globalProperties = [
+        modelDocs: "false"
+    ]
+    skipValidateSpec = true
+    logToStderr = true
+    generateAliasAsModel = false
+    enablePostProcessFile = false
+}
